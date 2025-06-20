@@ -12,6 +12,8 @@ const DashboardPage = () => {
 
   const navigate = useNavigate();
 
+  const API_BASE_URL = "https://task-manager-app.onrender.com";
+
   useEffect(() => {
     if (!token) {
       navigate("/");
@@ -20,7 +22,7 @@ const DashboardPage = () => {
 
     const fetchTasks = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/tasks", {
+        const res = await axios.get(`${API_BASE_URL}/api/tasks`, {
           headers: { Authorization: token },
         });
         setTasks(res.data);
@@ -38,7 +40,7 @@ const DashboardPage = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/tasks",
+        `${API_BASE_URL}/api/tasks`,
         {
           title: newTask,
           description: "Added by user",
@@ -57,7 +59,7 @@ const DashboardPage = () => {
   const toggleComplete = async (id, completed) => {
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/tasks/${id}`,
+        `${API_BASE_URL}/api/tasks/${id}`,
         { completed },
         {
           headers: { Authorization: token },
@@ -73,7 +75,7 @@ const DashboardPage = () => {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`, {
+      await axios.delete(`${API_BASE_URL}/api/tasks/${id}`, {
         headers: { Authorization: token },
       });
       setTasks((prev) => prev.filter((task) => task._id !== id));
@@ -91,7 +93,7 @@ const DashboardPage = () => {
     e.preventDefault();
     try {
       const res = await axios.put(
-        `http://localhost:5000/api/tasks/${id}`,
+        `${API_BASE_URL}/api/tasks/${id}`,
         { title: editedTitle },
         {
           headers: { Authorization: token },
