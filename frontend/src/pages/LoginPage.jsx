@@ -11,10 +11,13 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [msg, setMsg] = useState("");
 
+  // ✅ Use environment variable for backend URL
+  const API = import.meta.env.VITE_API_BASE_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post(`${API}/api/auth/login`, {
         email,
         password,
       });
