@@ -3,5 +3,11 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  appType: 'spa', // ✅ This ensures all routes fallback to index.html
+  build: {
+    outDir: 'dist', // ✅ Build folder
+  },
+  server: {
+    host: '0.0.0.0', // ✅ Publicly accessible for Render
+    port: 10000      // ✅ Match with Render start command
+  }
 })
